@@ -21,7 +21,7 @@ exports.config = {
     // will be called from there.
     //
     specs: [
-        './test/specs/**/*.js'
+        './test/specs/e2e/**/*.js'
     ],
     // Patterns to exclude.
     exclude: [
@@ -195,8 +195,31 @@ exports.config = {
      * @param {Array.<String>} specs        List of spec file paths that are to be run
      * @param {Object}         browser      instance of created browser/device session
      */
-    // before: function (capabilities, specs) {
-    // },
+    before: function (capabilities, specs) {
+        browser.addCommand("customFileUpload", async (path, uploadBoxSelector, submitUploadSelector) => {
+            const remoteFilePath = await browser.uploadFile(path)
+             await $('#file-upload').setValue(remoteFilePath)
+            await $('#file-submit').click()
+        })
+        
+        browser.addCommand("getTitleAndUrl", async () => {
+            return{
+                title: await browser.getTitle(),
+                url: await browser.getUrl(),
+            }
+        })
+
+        browser.addCommand('waitAndClick', async ( selector) => {
+            await (await $(selector)).waitForDisplayed()
+            await (await $(selector)).click()
+        })
+
+        browser.overwriteCommand("pause", async (origPauseFuction, ms) => {
+            console.log("sleeping for " + ms)
+            await origPauseFuction(ms)
+            return ms
+        })
+    },
     /**
      * Runs before a WebdriverIO command gets executed.
      * @param {String} commandName hook command name
