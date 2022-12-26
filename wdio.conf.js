@@ -219,6 +219,18 @@ exports.config = {
             await origPauseFuction(ms)
             return ms
         })
+        browser.addCommand("sauceLogin", async () => {
+            await (await $('.login-box')).waitForDisplayed()
+            await (await $('[data-test="username"]')).setValue('standard_user')
+            await (await $('[data-test="password"]')).setValue('secret_sauce')
+            await (await $('[data-test="login-button"]')).click()
+        })
+
+        browser.addCommand('sauceLogout', async () => {
+            await (await $('#react-burger-menu-btn')).click()
+            await (await $('#logout_sidebar_link')).waitForClickable()
+            await (await $('#logout_sidebar_link')).click()
+        })
     },
     /**
      * Runs before a WebdriverIO command gets executed.

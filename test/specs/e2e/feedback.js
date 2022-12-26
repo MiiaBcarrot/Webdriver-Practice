@@ -1,4 +1,4 @@
-describe("Feedback Form", () => {
+describe.skip("Feedback Form", () => {
     it('Should submit feedback form with all the values', async () =>{
         //define values for the form inputs
         const name = "Peter"
