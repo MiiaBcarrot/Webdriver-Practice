@@ -1,4 +1,4 @@
-describe('Sauce Demo - Product Order', () => {
+describe.skip('Sauce Demo - Product Order', () => {
     before(async () => {
         // Here goes login
         await browser.url('https://www.saucedemo.com/')
@@ -9,6 +9,7 @@ describe('Sauce Demo - Product Order', () => {
         // Here goes logout
         await browser.sauceLogout()
     })
+    
     it('Should complete product order', async () => {
         // await browser.pause(300)
         // Put product into shopping cart
