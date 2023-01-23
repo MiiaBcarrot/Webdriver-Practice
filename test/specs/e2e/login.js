@@ -7,7 +7,7 @@ describe("Login Flow", () => {
     await browser.waitAndClick('#signin_button')
     await $('#login_form').waitForDisplayed()
     await (await $('#user_login')).setValue('test')
-    await (await $('#user_passwor')).setValue('test')
+    await (await $('#user_password')).setValue('test')
     await (await $('input[type="submit"]')).click()
 
     const errorMessage = await $('.alert-error')
@@ -25,6 +25,6 @@ describe("Login Flow", () => {
     await (await $('input[type="submit"]')).click()
   
     const message = await $('.span6')
-    await expect(message).toHaveTextContaining('email: ${email}')
+    await expect(message).toHaveTextContaining(`email: ${email}`)
    })
 })
