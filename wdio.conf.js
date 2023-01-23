@@ -221,6 +221,7 @@ exports.config = {
             await origPauseFuction(ms)
             return ms
         })
+        
         browser.addCommand("sauceLogin", async () => {
             await (await $('.login-box')).waitForDisplayed()
             await (await $('[data-test="username"]')).setValue('standard_user')
